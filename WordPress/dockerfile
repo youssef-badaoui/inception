@@ -14,7 +14,3 @@ RUN chmod +x wp-cli.phar
 RUN mv wp-cli.phar /usr/local/bin/wp
 WORKDIR /var/www/html
 RUN wp core download --allow-root
-RUN sed -i "s|database_name_here|$HOME|" wp-config-sample.php
-RUN env > file.test
-# RUN wp config create --dbname=testname --dbuser=testuser --dbpass=testpass --allow-root
-
