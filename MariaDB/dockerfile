@@ -1,8 +1,8 @@
 FROM debian:buster
 
-RUN apt update && apt install mariadb-server expect -y
+RUN apt update && apt install mariadb-server -y
 RUN apt install vim -y
 COPY ./tools/script.sh /
 WORKDIR /
 RUN chmod +x script.sh
-CMD [ "/script.sh" ]
+ENTRYPOINT [ "/script.sh" ]
