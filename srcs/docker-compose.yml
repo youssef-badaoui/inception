@@ -1,0 +1,20 @@
+version: '3'
+services:
+  wordpress:
+    depends_on:
+      - mariadb
+    build :  ./requirements/WordPress/
+    image: wordpress:img
+    container_name: wordpress
+    ports:
+      - "8081:80"
+    env_file:
+      - .env
+  mariadb:
+    build: ./requirements/MariaDB/
+    image: mariadb:img
+    container_name: mariadb
+    ports:
+      - "3306:3306"
+    env_file:
+      - .env
