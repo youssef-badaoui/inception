@@ -1,15 +1,16 @@
-version: '3'
+version: '3.7'
 services:
   wordpress:
-    depends_on:
-      - mariadb
     build :  ./requirements/WordPress/
     image: wordpress:img
     container_name: wordpress
+    restart: on-failure
     ports:
-      - "8081:80"
+      - "9000:80"
     env_file:
       - .env
+    depends_on:
+      - mariadb
   mariadb:
     build: ./requirements/MariaDB/
     image: mariadb:img
@@ -18,3 +19,4 @@ services:
       - "3306:3306"
     env_file:
       - .env
+    restart: on-failure
