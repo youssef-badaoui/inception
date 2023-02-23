@@ -3,10 +3,6 @@ FROM debian:buster
 RUN apt-get update && apt-get upgrade -y && apt-get install php php-mysql php7.3-fpm \
         php-curl -y \
         && apt install wget curl -y
-
 COPY ./tools/script.sh /tmp/script.sh
-
-
-#the following tree lines are for wp-cli installation
-
+RUN  chmod +x  /tmp/script.sh
 ENTRYPOINT [ "/tmp/script.sh" ]

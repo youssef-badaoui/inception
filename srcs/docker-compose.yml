@@ -1,12 +1,23 @@
 version: '3.7'
 services:
+  nginx:
+    build: ./requirements/NGINX/
+    image: nginx:img
+    container_name: nginx
+    restart: on-failure
+    ports:
+      - "443:443"
+    env_file:
+      - .env
+    depends_on:
+      - wordpress
   wordpress:
     build :  ./requirements/WordPress/
     image: wordpress:img
     container_name: wordpress
     restart: on-failure
     ports:
-      - "9000:80"
+      - "9000:9000"
     env_file:
       - .env
     depends_on:
