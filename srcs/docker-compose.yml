@@ -11,6 +11,8 @@ services:
       - .env
     depends_on:
       - wordpress
+    volumes:
+      - testvol:/var/www/html
   wordpress:
     build :  ./requirements/WordPress/
     image: wordpress:img
@@ -22,6 +24,8 @@ services:
       - .env
     depends_on:
       - mariadb
+    volumes:
+      - testvol:/var/www/html
   mariadb:
     build: ./requirements/MariaDB/
     image: mariadb:img
@@ -31,3 +35,8 @@ services:
     env_file:
       - .env
     restart: on-failure
+    volumes:
+      - data_db:/var/lib/mysql/
+volumes:
+  testvol:
+  data_db:

@@ -4,5 +4,8 @@ RUN apt-get update && apt-get upgrade -y && apt-get install php php-mysql php7.3
         php-curl -y \
         && apt install wget curl -y
 COPY ./tools/script.sh /tmp/script.sh
-RUN  chmod +x  /tmp/script.sh
+RUN mkdir -p /run/php
+RUN mkdir -p /var/www/html
+WORKDIR /var/www/html
+RUN chmod +x  /tmp/script.sh
 ENTRYPOINT [ "/tmp/script.sh" ]
