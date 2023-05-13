@@ -1,6 +1,8 @@
 version: '3.7'
 services:
   nginx:
+    networks:
+      - xnetwork
     build: ./requirements/NGINX/
     image: nginx:img
     container_name: nginx
@@ -14,6 +16,8 @@ services:
     volumes:
       - testvol:/var/www/html
   wordpress:
+    networks:
+      - xnetwork
     build :  ./requirements/WordPress/
     image: wordpress:img
     container_name: wordpress
@@ -27,6 +31,8 @@ services:
     volumes:
       - testvol:/var/www/html
   mariadb:
+    networks:
+      - xnetwork
     build: ./requirements/MariaDB/
     image: mariadb:img
     container_name: mariadb
@@ -39,4 +45,17 @@ services:
       - data_db:/var/lib/mysql/
 volumes:
   testvol:
+    driver: local
+    driver_opts:
+      type: none
+      device: /home/ybadaoui/data/v1
+      o: bind
   data_db:
+    driver: local
+    driver_opts:
+      type: none
+      device: /home/ybadaoui/data/v2
+      o: bind
+networks:
+    xnetwork:
+      driver: bridge
